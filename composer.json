@@ -1,0 +1,12 @@
+{
+	"name": "crysalead/li3_pdf",
+	"type": "lithium-library",
+	"description": "li3_pdf brings PDF support to Lithium using Svg and librsvg2",
+	"keywords": ["lithium", "li3", "pdf", "php"],
+	"homepage": "https://github.com/crysalead/li3_pdf",
+	"minimum-stability": "dev",
+	"require": {
+		"php": ">=5.4",
+		"composer/installers": "dev-master"
+	}
+}
