@@ -3,12 +3,12 @@
  * li3_pdf: Pdf for Lithium
  *
  */
-namespace li3_pdf2\extensions\helper;
+namespace li3_pdf\extensions\helper;
 
 class Pdf extends \lithium\template\Helper{
 	
 	protected $_classes = array(
-		'svg' => 'li3_pdf2\extensions\SVG_Document'
+		'svg' => 'li3_pdf\extensions\SVG_Document'
 	);
 	
 	/*

@@ -1,6 +1,6 @@
 <?php
 
-namespace li3_pdf2\extensions;
+namespace li3_pdf\extensions;
 
 class SVG_Element extends SVG_Abstract {
 	protected $_parent;
