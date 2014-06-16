@@ -7,6 +7,8 @@ use lithium\util\Set;
 class SVG_Document extends SVG_Abstract {
 
 	public $_y = null;
+	protected $_pageCounter = 0;
+	protected $_pageSet = [0];
 
 	// Default A4 dimensions
 	protected $_attrs = [
@@ -33,8 +35,11 @@ class SVG_Document extends SVG_Abstract {
 	}
 
 	public function render() {
-		$svg = '<?xml version="1.0" encoding="utf-8" standalone="yes"?>';			
+		$svg = '<?xml version="1.0" encoding="utf-8" standalone="yes"?>';
 		$content = $this->_renderElements(1);
+		foreach ($this->_pageSet as $index => $pageNumber) {
+			$content = str_replace('<pageSetNumber'.$index.'/>', $pageNumber, $content);
+		}
 		$svg .= $this->_renderElement('svg', $this->_attrs, $content, 0, true);
 		return $svg;
 	}
@@ -43,12 +48,23 @@ class SVG_Document extends SVG_Abstract {
 		$elem = new SVG_Element($this, $name);
 		$this->_elements[] = $elem;
 		if ($name == 'page') {
+			$this->_pageCounter++;
+			$this->_pageSet[count($this->_pageSet) -1]++;
 			$this->_y = $this->_attrs['verticalMargin'];
 			foreach ($this->_layout as $closure) {
 				if(is_callable($closure)) $closure($this, $elem);
 			}
   		}
 		return $elem;
+	}
+
+	function pagination() {
+		return $this->_pageCounter.' / <pageSetNumber'.(count($this->_pageSet) -1).'/>';
+	}
+
+	function addPageSet() {
+		$this->_pageCounter = 0;
+		$this->_pageSet[] = 0;
 	}
 
 	function lf(&$page) {
