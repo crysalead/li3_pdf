@@ -39,6 +39,7 @@ class SVG_Document extends SVG_Abstract {
 		$content = $this->_renderElements(1);
 		foreach ($this->_pageSet as $index => $pageNumber) {
 			$content = str_replace('<pageSetNumber'.$index.'/>', $pageNumber, $content);
+			$content = str_replace(htmlspecialchars('<pageSetNumber'.$index.'/>'), $pageNumber, $content);
 		}
 		$svg .= $this->_renderElement('svg', $this->_attrs, $content, 0, true);
 		return $svg;
