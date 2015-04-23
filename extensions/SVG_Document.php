@@ -111,7 +111,7 @@ class SVG_Document extends SVG_Abstract {
 			$text
 				->x($x + $default['text']['margin-x'])
 				->y($this->_y + $default['text']['margin-y'])
-				->content($label)
+				->content(htmlspecialchars($label))
 				->parent();
 			unset($default['text']['margin-x']);
 			unset($default['text']['margin-y']);
